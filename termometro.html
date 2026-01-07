@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<!-- saved from url=(0097)file:///C:/Users/Guilherme%20Araujo/Downloads/PORTAL%20DE%20DIREITO%20REGULATORIO/home.html#notas -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AUCTORIS — Termômetro Regulatório</title>
+  <style>
+    :root{
+      /* BigLaw Navy */
+      --bg0:#070A12;
+      --bg1:#0A1020;
+      --bg2:#0B1430;
+      --card:#0C1733;
+      --card2:#0B1A3B;
+      --line:rgba(255,255,255,.08);
+      --line2:rgba(255,255,255,.12);
+
+      --fg:#EAF0FF;
+      --muted:rgba(234,240,255,.68);
+      --muted2:rgba(234,240,255,.52);
+
+      --accent:#6EA8FF;
+      --accent2:#9CC4FF;
+      --ok:#46D39A;
+      --warn:#F2C14E;
+      --risk:#FF6B6B;
+
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 14px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--fg);
+      background:
+        radial-gradient(1200px 600px at 18% 10%, rgba(110,168,255,.10), transparent 60%),
+        radial-gradient(1000px 520px at 78% 18%, rgba(156,196,255,.08), transparent 60%),
+        radial-gradient(900px 520px at 50% 85%, rgba(110,168,255,.06), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1) 45%, var(--bg0));
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height:1.5;
+      overflow-x:hidden;
+    }
+
+    /* Subtle grid */
+    .gridFX{
+      position:fixed; inset:0; pointer-events:none; opacity:.32;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse at 50% 18%, black 35%, transparent 70%);
+    }
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(7,10,18,.92), rgba(7,10,18,.60));
+      border-bottom:1px solid var(--line);
+    }
+    .topbarInner{
+      max-width:1240px;
+      margin:0 auto;
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 280px;
+    }
+    .sigil{
+      width:36px; height:36px;
+      border-radius:12px;
+      background: radial-gradient(circle at 30% 30%, rgba(156,196,255,.9), rgba(110,168,255,.25) 55%, rgba(110,168,255,.05));
+      box-shadow: 0 12px 30px rgba(110,168,255,.18);
+      border:1px solid rgba(156,196,255,.25);
+    }
+    .brandTitle{
+      display:flex; flex-direction:column;
+      gap:2px;
+    }
+    .brandTitle strong{
+      letter-spacing:.18em;
+      font-size:12px;
+      text-transform:uppercase;
+    }
+    .brandTitle span{
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .toolbar{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:10px;
+      width:100%;
+      flex-wrap:wrap;
+    }
+
+    .pill{
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      background: rgba(12,23,51,.35);
+      border-radius: 999px;
+    }
+    .pill label{
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.03em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+    select{
+      appearance:none;
+      background: transparent;
+      border:0;
+      color:var(--fg);
+      font-weight:600;
+      outline:none;
+      cursor:pointer;
+      padding-right:18px;
+    }
+    .caret{
+      width:0; height:0;
+      border-left:5px solid transparent;
+      border-right:5px solid transparent;
+      border-top:6px solid rgba(234,240,255,.55);
+      transform: translateY(1px);
+    }
+
+    .btn{
+      border:1px solid var(--line);
+      background: rgba(12,23,51,.40);
+      color:var(--fg);
+      padding:10px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:12px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      display:flex; align-items:center; gap:10px;
+      user-select:none;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(156,196,255,.28);
+      background: rgba(12,26,65,.55);
+    }
+    .btnPrimary{
+      border-color: rgba(110,168,255,.35);
+      background: linear-gradient(180deg, rgba(110,168,255,.20), rgba(110,168,255,.08));
+      box-shadow: 0 20px 40px rgba(110,168,255,.10);
+    }
+    .btnGhost{
+      background: transparent;
+    }
+
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(110,168,255,.10);
+    }
+
+    /* Layout */
+    .shell{
+      max-width:1240px;
+      margin:0 auto;
+      padding:22px 16px 70px;
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:18px;
+    }
+
+    /* Sidebar */
+    .side{
+      position:sticky;
+      top:76px;
+      align-self:start;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(12,23,51,.65), rgba(12,23,51,.35));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .sideHeader{
+      padding:16px 16px 12px;
+      border-bottom:1px solid var(--line);
+      display:flex; flex-direction:column;
+      gap:10px;
+    }
+    .sideHeader .h{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .sideHeader h2{
+      margin:0;
+      font-size:14px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .badge{
+      font-size:11px;
+      color: rgba(234,240,255,.78);
+      border:1px solid rgba(255,255,255,.12);
+      padding:6px 10px;
+      border-radius: 999px;
+      background: rgba(7,10,18,.35);
+      white-space:nowrap;
+    }
+    .sideMeta{
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .metaCard{
+      border:1px solid var(--line);
+      background: rgba(7,10,18,.28);
+      padding:10px 10px;
+      border-radius: 14px;
+    }
+    .metaCard .k{
+      color:var(--muted);
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+      margin-bottom:6px;
+    }
+    .metaCard .v{
+      font-weight:800;
+      font-size:13px;
+    }
+    .nav{
+      padding:10px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .nav a{
+      text-decoration:none;
+      color:var(--fg);
+      border:1px solid var(--line);
+      background: rgba(7,10,18,.22);
+      padding:12px 12px;
+      border-radius: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+      font-weight:750;
+      letter-spacing:.02em;
+    }
+    .nav a:hover{
+      transform: translateY(-1px);
+      border-color: rgba(110,168,255,.24);
+      background: rgba(12,26,65,.50);
+    }
+    .nav small{ color:var(--muted); font-weight:650; letter-spacing:.03em; }
+    .arrow{
+      width:26px; height:26px;
+      border-radius: 10px;
+      border:1px solid var(--line);
+      display:grid; place-items:center;
+      background: rgba(12,23,51,.35);
+    }
+    .arrow:before{
+      content:"›";
+      font-size:18px;
+      color: rgba(234,240,255,.75);
+      transform: translateX(1px);
+    }
+
+    .sideFooter{
+      padding:12px 14px 14px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    /* Main */
+    .main{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      min-width:0;
+    }
+
+    .hero{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(110,168,255,.14), rgba(12,23,51,.58) 45%, rgba(12,23,51,.34));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero:after{
+      content:"";
+      position:absolute; inset:-20%;
+      background:
+        radial-gradient(circle at 25% 25%, rgba(156,196,255,.22), transparent 45%),
+        radial-gradient(circle at 75% 40%, rgba(110,168,255,.16), transparent 45%);
+      transform: rotate(-8deg);
+      pointer-events:none;
+      opacity:.8;
+    }
+    .heroInner{
+      position:relative;
+      padding:20px 18px;
+      display:flex;
+      gap:16px;
+      align-items:flex-end;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .hero h1{
+      margin:0;
+      font-size:26px;
+      letter-spacing:.02em;
+    }
+    .hero p{
+      margin:8px 0 0;
+      color:var(--muted);
+      max-width: 62ch;
+      font-weight:650;
+    }
+    .heroActions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center;
+    }
+
+    /* Cards grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(12,23,51,.66), rgba(12,23,51,.28));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      min-width:0;
+    }
+    .cardHeader{
+      padding:14px 16px 12px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .cardHeader h3{
+      margin:0;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color: rgba(234,240,255,.92);
+    }
+    .cardBody{
+      padding:14px 16px 16px;
+    }
+
+    .kpis{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:12px;
+    }
+    .kpi{
+      border:1px solid var(--line);
+      background: rgba(7,10,18,.22);
+      border-radius: 16px;
+      padding:12px;
+      min-width:0;
+    }
+    .kpi .label{
+      color:var(--muted);
+      font-size:11px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .kpi .value{
+      font-size:16px;
+      font-weight:900;
+      letter-spacing:.01em;
+      margin:0 0 4px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .kpi .note{
+      color:var(--muted2);
+      font-size:12px;
+      font-weight:650;
+      margin:0;
+    }
+
+    .statusPill{
+      display:inline-flex; align-items:center; gap:10px;
+      border:1px solid var(--line2);
+      background: rgba(7,10,18,.26);
+      padding:10px 12px;
+      border-radius:999px;
+      font-weight:900;
+      letter-spacing:.02em;
+      margin: 0 0 10px;
+      flex-wrap:wrap;
+    }
+    .statusDot{
+      width:10px; height:10px; border-radius:50%;
+    }
+    .statusHint{
+      color:var(--muted);
+      font-size:12px;
+      font-weight:650;
+      margin:0;
+    }
+
+    /* Lists */
+    .list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .item{
+      border:1px solid var(--line);
+      background: rgba(7,10,18,.20);
+      border-radius: 16px;
+      padding:12px 12px;
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      min-width:0;
+    }
+    .pillIcon{
+      width:34px; height:34px;
+      border-radius: 14px;
+      border:1px solid rgba(110,168,255,.22);
+      background: rgba(110,168,255,.10);
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+    }
+    .item b{
+      display:block;
+      font-size:13px;
+      letter-spacing:.01em;
+      margin-bottom:4px;
+    }
+    .item span{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:650;
+    }
+
+    /* Charts */
+    .chartWrap{
+      display:grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap:14px;
+    }
+    .canvasBox{
+      border:1px solid var(--line);
+      background: rgba(7,10,18,.18);
+      border-radius: 16px;
+      padding:12px;
+      overflow:hidden;
+    }
+    .canvasHeader{
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      margin-bottom:8px;
+    }
+    .canvasHeader .t{
+      color: rgba(234,240,255,.92);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .canvasHeader .s{
+      color:var(--muted);
+      font-size:12px;
+      font-weight:650;
+    }
+    canvas{ width:100%; height:220px; display:block; }
+
+    /* Modal */
+    .modalBack{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center; justify-content:center;
+      padding:18px;
+      z-index:100;
+    }
+    .modal{
+      max-width:860px; width:100%;
+      border:1px solid var(--line2);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(12,23,51,.92), rgba(7,10,18,.90));
+      box-shadow: 0 30px 90px rgba(0,0,0,.60);
+      overflow:hidden;
+    }
+    .modalTop{
+      padding:14px 16px;
+      border-bottom:1px solid var(--line);
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .modalTop strong{
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+    .modalBody{
+      padding:16px;
+      color: rgba(234,240,255,.86);
+      font-weight:650;
+    }
+    .modalBody p{ margin:0 0 10px; color: rgba(234,240,255,.82); }
+    .modalBody .small{ color:var(--muted); font-size:12px; }
+    .x{
+      border:1px solid var(--line);
+      background: rgba(7,10,18,.35);
+      color:var(--fg);
+      width:36px; height:36px;
+      border-radius: 14px;
+      cursor:pointer;
+      font-weight:900;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .shell{ grid-template-columns: 1fr; }
+      .side{ position:relative; top:auto; }
+      .kpis{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .chartWrap{ grid-template-columns: 1fr; }
+      .brand{ min-width:auto; }
+    }
+    @media print{
+      .topbar, .side, .heroActions, .gridFX { display:none !important; }
+      body{ background:#fff; color:#111; }
+      .shell{ max-width:none; padding:0; }
+      .main{ gap:12px; }
+      .card{ box-shadow:none; border-color:#ccc; }
+      .cardHeader{ border-color:#ddd; }
+      .canvasBox{ border-color:#ddd; }
+    }
+  </style>
+</head>
+<body>
+  <div class="gridFX"></div>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbarInner">
+      <div class="brand">
+        <div class="sigil" aria-hidden="true"></div>
+        <div class="brandTitle">
+          <strong>AUCTORIS</strong>
+          <span>Sistema institucional de leitura decisória</span>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="pill" title="Selecione o período do Termômetro (modelo fixo; conteúdo substituível).">
+          <label for="periodo">Período</label>
+          <select id="periodo" aria-label="Período">
+            <option value="2026-01">Janeiro/2026</option>
+            <option value="2026-02">Fevereiro/2026</option>
+            <option value="2026-03">Março/2026</option>
+          </select>
+          <div class="caret" aria-hidden="true"></div>
+        </div>
+
+        <div class="pill" title="Recorte do Termômetro (modelo).">
+          <label for="setor">Recorte</label>
+          <select id="setor" aria-label="Recorte">
+            <option value="tech">Tecnologia</option>
+            <option value="fintech">Fintech</option>
+            <option value="saude">Saúde Digital</option>
+          </select>
+          <div class="caret" aria-hidden="true"></div>
+        </div>
+
+        <button class="btn btnPrimary" id="btnExport" title="Exportar/Imprimir (use o print do navegador).">
+          <span class="dot" aria-hidden="true"></span> Exportar
+        </button>
+        <button class="btn" id="btnDisclaimer" title="Aviso de uso / limites.">
+          Aviso de uso
+        </button>
+        <button class="btn btnGhost" id="btnAbout" title="Tese institucional do portal.">
+          Tese
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="shell">
+    <!-- SIDEBAR -->
+    <aside class="side">
+      <div class="sideHeader">
+        <div class="h">
+          <h2>Termômetro</h2>
+          <span class="badge">Modelo fixo</span>
+        </div>
+
+        <div class="sideMeta">
+          <div class="metaCard">
+            <div class="k">Atualização</div>
+            <div class="v" id="metaAtualizacao">Mensal</div>
+          </div>
+          <div class="metaCard">
+            <div class="k">Fonte</div>
+            <div class="v">Dados públicos</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Navegação">
+        <a href="file:///C:/Users/Guilherme%20Araujo/Downloads/PORTAL%20DE%20DIREITO%20REGULATORIO/home.html#visao">
+          <div>
+            <div>Visão executiva</div>
+            <small>status • sinais • leitura</small>
+          </div>
+          <div class="arrow" aria-hidden="true"></div>
+        </a>
+        <a href="file:///C:/Users/Guilherme%20Araujo/Downloads/PORTAL%20DE%20DIREITO%20REGULATORIO/home.html#indicadores">
+          <div>
+            <div>Indicadores</div>
+            <small>painel sintético</small>
+          </div>
+          <div class="arrow" aria-hidden="true"></div>
+        </a>
+        <a href="file:///C:/Users/Guilherme%20Araujo/Downloads/PORTAL%20DE%20DIREITO%20REGULATORIO/home.html#temas">
+          <div>
+            <div>Temas em observação</div>
+            <small>recorrências</small>
+          </div>
+          <div class="arrow" aria-hidden="true"></div>
+        </a>
+        <a href="file:///C:/Users/Guilherme%20Araujo/Downloads/PORTAL%20DE%20DIREITO%20REGULATORIO/home.html#orgaos">
+          <div>
+            <div>Órgãos em foco</div>
+            <small>qualitativo</small>
+          </div>
+          <div class="arrow" aria-hidden="true"></div>
+        </a>
+        <a href="file:///C:/Users/Guilherme%20Araujo/Downloads/PORTAL%20DE%20DIREITO%20REGULATORIO/home.html#notas">
+          <div>
+            <div>Notas e limites</div>
+            <small>disclaimer</small>
+          </div>
+          <div class="arrow" aria-hidden="true"></div>
+        </a>
+      </nav>
+
+      <div class="sideFooter">
+        <div><b>Regra:</b> leitura institucional, não operacional.</div>
+        <div style="margin-top:6px;">Sem avaliação de empresas • sem parecer • sem recomendação.</div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <section class="hero" id="visao">
+        <div class="heroInner">
+          <div>
+            <h1>Termômetro Regulatório — <span style="color:var(--accent2)">Tecnologia</span></h1>
+            <p>
+              Um painel executivo de leitura regulatória: sinais públicos, padrões de atenção institucional
+              e deslocamentos interpretativos que antecedem sanção, litígio ou dano reputacional.
+            </p>
+          </div>
+          <div class="heroActions">
+            <button class="btn" id="btnPrint" title="Imprimir/Salvar em PDF pelo navegador">
+              Imprimir / PDF
+            </button>
+            <button class="btn" id="btnCopy" title="Copiar síntese (modelo) para colar em PDF/LinkedIn">
+              Copiar síntese
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- INDICADORES -->
+      <section class="card" id="indicadores">
+        <div class="cardHeader">
+          <h3>Painel sintético</h3>
+          <span class="badge" id="badgePeriodo">Janeiro/2026</span>
+        </div>
+
+        <div class="cardBody">
+          <div class="statusPill" id="statusPill">
+            <span class="statusDot" id="statusDot" aria-hidden="true" style="background: rgb(242, 193, 78);"></span>
+            <span id="statusText">🟡 Estabilidade com sinais de intensificação seletiva</span>
+          </div>
+          <p class="statusHint" id="statusHint">Classificação baseada em volume, natureza e tom institucional de atos públicos recentes.</p>
+
+          <div style="height:14px"></div>
+
+          <div class="kpis" aria-label="KPIs">
+            <div class="kpi">
+              <div class="label"><span class="dot" style="background:var(--accent)" aria-hidden="true"></span> Foco do período</div>
+              <div class="value" id="kpiFoco">Decisão &amp; registro</div>
+              <p class="note" id="kpiFocoNote">Atenção ao “como decidiu”, não só ao “que ocorreu”.</p>
+            </div>
+            <div class="kpi">
+              <div class="label"><span class="dot" style="background:var(--warn)" aria-hidden="true"></span> Sinal dominante</div>
+              <div class="value" id="kpiSinal">Pressão seletiva</div>
+              <p class="note" id="kpiSinalNote">Mais exigência de coerência e lastro documental.</p>
+            </div>
+            <div class="kpi">
+              <div class="label"><span class="dot" style="background:var(--ok)" aria-hidden="true"></span> Natureza do ciclo</div>
+              <div class="value" id="kpiCiclo">Estável</div>
+              <p class="note" id="kpiCicloNote">Sem ruptura geral, com pontos de intensificação.</p>
+            </div>
+            <div class="kpi">
+              <div class="label"><span class="dot" style="background:var(--risk)" aria-hidden="true"></span> Atenção executiva</div>
+              <div class="value" id="kpiAtencao">Narrativa</div>
+              <p class="note" id="kpiAtencaoNote">Comunicação institucional e rastreabilidade.</p>
+            </div>
+          </div>
+
+          <div style="height:16px"></div>
+
+          <div class="chartWrap">
+            <div class="canvasBox">
+              <div class="canvasHeader">
+                <div class="t">Linha de tendência (ilustrativa)</div>
+                <div class="s">pressão regulatória • 6 períodos</div>
+              </div>
+              <canvas id="trend" width="446" height="220" aria-label="Gráfico de tendência"></canvas>
+              <div class="muted" style="font-size:12px; font-weight:650; margin-top:10px;">
+                *Dados demonstrativos para protótipo. No uso real, o eixo pode ser qualitativo (baixo/médio/alto) com registro textual.
+              </div>
+            </div>
+
+            <div class="canvasBox">
+              <div class="canvasHeader">
+                <div class="t">Índice visual</div>
+                <div class="s">termômetro (qualitativo)</div>
+              </div>
+              <canvas id="gauge" width="323" height="220" aria-label="Gauge do Termômetro"></canvas>
+              <div class="muted" style="font-size:12px; font-weight:650; margin-top:10px;">
+                Interpretar como sinal executivo: não é score de risco e não é avaliação de empresa.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEMAS -->
+      <section class="card" id="temas">
+        <div class="cardHeader">
+          <h3>Temas em observação</h3>
+          <span class="badge">Recorrências</span>
+        </div>
+        <div class="cardBody">
+          <div class="list" id="temasList"><div class="item">
+        <div class="pillIcon" aria-hidden="true">⚖</div>
+        <div style="min-width:0;">
+          <b>Incidentes e comunicação institucional</b>
+          <span>Coerência narrativa e registro das decisões nas primeiras horas após eventos sensíveis.</span>
+        </div>
+      </div><div class="item">
+        <div class="pillIcon" aria-hidden="true">🗂</div>
+        <div style="min-width:0;">
+          <b>Governança de dados e registros internos</b>
+          <span>Ênfase em existência, integridade e rastreabilidade de documentos que demonstrem decisão e controle.</span>
+        </div>
+      </div><div class="item">
+        <div class="pillIcon" aria-hidden="true">↔</div>
+        <div style="min-width:0;">
+          <b>Uso secundário e compartilhamento de dados</b>
+          <span>Observação mais fina sobre finalidade, contexto e justificativa institucional para reutilização de dados.</span>
+        </div>
+      </div><div class="item">
+        <div class="pillIcon" aria-hidden="true">⌁</div>
+        <div style="min-width:0;">
+          <b>Responsabilidade decisória</b>
+          <span>Leitura menos operacional e mais institucional: quem decide, quando decide e com qual lastro.</span>
+        </div>
+      </div></div>
+
+          <div style="height:14px"></div>
+
+          <div class="canvasBox">
+            <div class="canvasHeader">
+              <div class="t">Distribuição temática (ilustrativa)</div>
+              <div class="s">peso relativo • protótipo</div>
+            </div>
+            <canvas id="donut" width="810" height="220" aria-label="Gráfico de distribuição"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- ORGAOS -->
+      <section class="card" id="orgaos">
+        <div class="cardHeader">
+          <h3>Órgãos em foco</h3>
+          <span class="badge">Qualitativo</span>
+        </div>
+        <div class="cardBody">
+          <div class="list" id="orgaosList"><div class="item">
+        <div class="pillIcon" aria-hidden="true">🏛</div>
+        <div style="min-width:0;">
+          <b>ANPD</b>
+          <span>Atos, orientações e decisões públicas que consolidam padrões de leitura institucional.</span>
+        </div>
+      </div><div class="item">
+        <div class="pillIcon" aria-hidden="true">⚑</div>
+        <div style="min-width:0;">
+          <b>Ministério Público</b>
+          <span>Pressão difusa sobre incidentes, comunicação e impacto a titulares/consumidores.</span>
+        </div>
+      </div><div class="item">
+        <div class="pillIcon" aria-hidden="true">◎</div>
+        <div style="min-width:0;">
+          <b>Órgãos de defesa do consumidor</b>
+          <span>Foco em transparência, atendimento e efeitos práticos ao usuário.</span>
+        </div>
+      </div></div>
+
+          <div style="height:8px"></div>
+
+          <div class="muted" style="font-size:12px; font-weight:650;">
+            Lista qualitativa (sem ranking). O objetivo é sinalizar atenção institucional, não medir desempenho.
+          </div>
+        </div>
+      </section>
+
+      <!-- LEITURA -->
+      <section class="card" id="leitura">
+        <div class="cardHeader">
+          <h3>Leitura institucional</h3>
+          <span class="badge">Síntese</span>
+        </div>
+        <div class="cardBody">
+          <p id="leituraText" style="margin:0; font-weight:700; color:rgba(234,240,255,.88);">O período indica estabilidade regulatória formal, combinada com intensificação seletiva da atenção institucional à forma como organizações estruturam decisões, registros e comunicações após eventos sensíveis. Observa-se deslocamento do foco exclusivamente técnico para uma leitura mais ampla, em que governança, narrativa institucional e preservação de evidências se tornam elementos centrais do escrutínio.</p>
+        </div>
+      </section>
+
+      <!-- NOTAS / LIMITES -->
+      <section class="card" id="notas">
+        <div class="cardHeader">
+          <h3>Notas e limites de uso</h3>
+          <span class="badge">Blindagem</span>
+        </div>
+        <div class="cardBody">
+          <p style="margin:0 0 10px; color:rgba(234,240,255,.86); font-weight:700;">
+            Este material tem finalidade exclusivamente informativa e educacional.
+          </p>
+          <p class="muted" style="margin:0 0 10px; font-weight:650;">
+            Não constitui parecer jurídico, avaliação de conformidade, recomendação operacional ou monitoramento em tempo real.
+            Não há análise de empresas individualmente. A aplicação depende do contexto específico de cada organização.
+          </p>
+          <p class="muted" style="margin:0; font-weight:650;">
+            Reprodução e uso derivado sem autorização são vedados. O conteúdo é estruturado como leitura institucional autoral.
+          </p>
+        </div>
+      </section>
+
+      <div style="color:var(--muted); font-size:12px; font-weight:650; text-align:center; margin-top:4px;">
+        O Termômetro cria hábito. O Radar cria valor. O AUCTORIS cria poder institucional.
+      </div>
+    </main>
+  </div>
+
+  <!-- MODALS -->
+  <div class="modalBack" id="modalBack" role="dialog" aria-modal="true" aria-hidden="true" style="display: none;">
+    <div class="modal">
+      <div class="modalTop">
+        <strong id="modalTitle">Tese</strong>
+        <button class="x" id="modalClose" aria-label="Fechar">×</button>
+      </div>
+      <div class="modalBody" id="modalBody">
+      <p><b>Regulação não muda de um dia para o outro.</b> A forma como o regulador decide, sim.</p>
+      <p>O Termômetro existe para sinalizar deslocamentos de atenção institucional e padrões de leitura pública que antecedem sanção, litígio ou dano reputacional.</p>
+      <p class="small">Sem marketing, sem serviços, sem promessa. Apenas leitura estruturada.</p>
+    </div>
+    </div>
+  </div>
+
+<script>
+  /* =========================
+     MODELO FIXO — DADOS SUBSTITUÍVEIS
+     (Você troca só este objeto no futuro)
+  ========================= */
+
+  const MODEL = {
+    "2026-01": {
+      periodLabel: "Janeiro/2026",
+      segmentLabel: "Tecnologia",
+      status: { level:"warn", label:"🟡 Estabilidade com sinais de intensificação seletiva" },
+      kpis: {
+        foco: ["Decisão & registro", "Atenção ao “como decidiu”, não só ao “que ocorreu”."],
+        sinal: ["Pressão seletiva", "Mais exigência de coerência e lastro documental."],
+        ciclo: ["Estável", "Sem ruptura geral, com pontos de intensificação."],
+        atencao: ["Narrativa", "Comunicação institucional e rastreabilidade."]
+      },
+      temas: [
+        { title:"Incidentes e comunicação institucional", desc:"Coerência narrativa e registro das decisões nas primeiras horas após eventos sensíveis.", icon:"⚖" },
+        { title:"Governança de dados e registros internos", desc:"Ênfase em existência, integridade e rastreabilidade de documentos que demonstrem decisão e controle.", icon:"🗂" },
+        { title:"Uso secundário e compartilhamento de dados", desc:"Observação mais fina sobre finalidade, contexto e justificativa institucional para reutilização de dados.", icon:"↔" },
+        { title:"Responsabilidade decisória", desc:"Leitura menos operacional e mais institucional: quem decide, quando decide e com qual lastro.", icon:"⌁" }
+      ],
+      orgaos: [
+        { title:"ANPD", desc:"Atos, orientações e decisões públicas que consolidam padrões de leitura institucional.", icon:"🏛" },
+        { title:"Ministério Público", desc:"Pressão difusa sobre incidentes, comunicação e impacto a titulares/consumidores.", icon:"⚑" },
+        { title:"Órgãos de defesa do consumidor", desc:"Foco em transparência, atendimento e efeitos práticos ao usuário.", icon:"◎" }
+      ],
+      leitura:
+        "O período indica estabilidade regulatória formal, combinada com intensificação seletiva da atenção institucional à forma como organizações estruturam decisões, registros e comunicações após eventos sensíveis. Observa-se deslocamento do foco exclusivamente técnico para uma leitura mais ampla, em que governança, narrativa institucional e preservação de evidências se tornam elementos centrais do escrutínio.",
+      /* gráficos demonstrativos (0–100) */
+      trendSeries: [38, 44, 42, 50, 47, 56],
+      gaugeValue: 54,
+      donut: [
+        { name:"Incidentes & comunicação", value:28 },
+        { name:"Governança & registros", value:30 },
+        { name:"Uso secundário", value:22 },
+        { name:"Responsabilidade decisória", value:20 }
+      ]
+    },
+    "2026-02": {
+      periodLabel: "Fevereiro/2026",
+      segmentLabel: "Tecnologia",
+      status: { level:"warn", label:"🟡 Estabilidade com maior ênfase em documentação" },
+      kpis: {
+        foco: ["Documentação", "Rastreabilidade e consistência interna ganham centralidade."],
+        sinal: ["Cobrança de lastro", "Menos tolerância a improviso e ausência de registro."],
+        ciclo: ["Estável", "Incremental, sem mudança brusca."],
+        atencao: ["Evidência", "Prova e trilha decisória como linguagem institucional."]
+      },
+      temas: [
+        { title:"Trilhas de decisão e retenção", desc:"Foco em demonstração: política, execução e evidência mínima.", icon:"⟡" },
+        { title:"Processos internos e governança", desc:"Estrutura viva, não checklist; coerência entre áreas.", icon:"◷" },
+        { title:"Transparência e atendimento", desc:"Mais atenção ao “como atende” e “como responde” ao titular/cliente.", icon:"◉" },
+        { title:"Incidentes como fato institucional", desc:"Pressão por condução e comunicação, não só remediação técnica.", icon:"⟁" }
+      ],
+      orgaos: [
+        { title:"ANPD", desc:"Consolidação de padrões de governança e comunicação.", icon:"🏛" },
+        { title:"Procons", desc:"Recortes de dano ao consumidor e transparência.", icon:"◎" },
+        { title:"Judiciário (ecos)", desc:"Reforço de expectativas de prova e rastreabilidade.", icon:"⚖" }
+      ],
+      leitura:
+        "O período reforça a centralidade da documentação e da trilha decisória como sinais de governança. A leitura institucional privilegia a consistência entre discurso, procedimento e evidência, reduzindo tolerância a respostas improvisadas ou fragmentadas.",
+      trendSeries: [42, 46, 48, 52, 55, 58],
+      gaugeValue: 58,
+      donut: [
+        { name:"Trilha decisória", value:32 },
+        { name:"Governança", value:26 },
+        { name:"Transparência", value:22 },
+        { name:"Incidentes", value:20 }
+      ]
+    },
+    "2026-03": {
+      periodLabel: "Março/2026",
+      segmentLabel: "Tecnologia",
+      status: { level:"risk", label:"🔴 Intensificação moderada (recortes sensíveis)" },
+      kpis: {
+        foco: ["Sensíveis & escala", "Pontos de atenção em dados sensíveis e operações em larga escala."],
+        sinal: ["Exigência", "Tom mais afirmativo na leitura institucional."],
+        ciclo: ["Aquecendo", "Aumento de atenção e expectativa de governança."],
+        atencao: ["Reação", "Tempo, comando e registro ganham peso."]
+      },
+      temas: [
+        { title:"Dados sensíveis e alta escala", desc:"Expectativas mais altas de controle e documentação.", icon:"⬚" },
+        { title:"Comunicação e coordenação", desc:"Coerência institucional e responsabilidade de fala.", icon:"◈" },
+        { title:"Prova e preservação mínima", desc:"Irreversibilidade de erro nas primeiras horas.", icon:"⟠" },
+        { title:"Terceiros e cadeia de fornecedores", desc:"Responsabilidade por operadores e suboperadores.", icon:"⟿" }
+      ],
+      orgaos: [
+        { title:"ANPD", desc:"Recortes mais rigorosos em incidentes e escala.", icon:"🏛" },
+        { title:"MP", desc:"Atuação correlata em impacto coletivo.", icon:"⚑" },
+        { title:"Órgãos setoriais", desc:"Pressão localizada conforme o setor.", icon:"◍" }
+      ],
+      leitura:
+        "O período sinaliza intensificação moderada em recortes sensíveis, com elevação da expectativa de resposta institucional: comando, tempo, preservação mínima e coerência de comunicação. A leitura do regulador tende a priorizar sinais de governança demonstrável.",
+      trendSeries: [48, 52, 56, 60, 62, 66],
+      gaugeValue: 66,
+      donut: [
+        { name:"Dados sensíveis", value:30 },
+        { name:"Comunicação", value:24 },
+        { name:"Prova", value:26 },
+        { name:"Terceiros", value:20 }
+      ]
+    }
+  };
+
+  /* =========================
+     UI / STATE
+  ========================= */
+
+  const $ = (id)=>document.getElementById(id);
+
+  const periodoSel = $("periodo");
+  const setorSel = $("setor");
+
+  const badgePeriodo = $("badgePeriodo");
+  const statusPill = $("statusPill");
+  const statusDot = $("statusDot");
+  const statusText = $("statusText");
+  const statusHint = $("statusHint");
+
+  const kpiFoco = $("kpiFoco"), kpiFocoNote = $("kpiFocoNote");
+  const kpiSinal = $("kpiSinal"), kpiSinalNote = $("kpiSinalNote");
+  const kpiCiclo = $("kpiCiclo"), kpiCicloNote = $("kpiCicloNote");
+  const kpiAtencao = $("kpiAtencao"), kpiAtencaoNote = $("kpiAtencaoNote");
+
+  const temasList = $("temasList");
+  const orgaosList = $("orgaosList");
+  const leituraText = $("leituraText");
+
+  const modalBack = $("modalBack");
+  const modalTitle = $("modalTitle");
+  const modalBody = $("modalBody");
+  const modalClose = $("modalClose");
+
+  const btnDisclaimer = $("btnDisclaimer");
+  const btnAbout = $("btnAbout");
+  const btnExport = $("btnExport");
+  const btnPrint = $("btnPrint");
+  const btnCopy = $("btnCopy");
+
+  let currentKey = periodoSel.value;
+
+  function levelColor(level){
+    if(level==="ok") return getComputedStyle(document.documentElement).getPropertyValue("--ok").trim();
+    if(level==="warn") return getComputedStyle(document.documentElement).getPropertyValue("--warn").trim();
+    if(level==="risk") return getComputedStyle(document.documentElement).getPropertyValue("--risk").trim();
+    return getComputedStyle(document.documentElement).getPropertyValue("--accent").trim();
+  }
+
+  function openModal(title, html){
+    modalTitle.textContent = title;
+    modalBody.innerHTML = html;
+    modalBack.style.display = "flex";
+    modalBack.setAttribute("aria-hidden","false");
+  }
+  function closeModal(){
+    modalBack.style.display = "none";
+    modalBack.setAttribute("aria-hidden","true");
+  }
+
+  modalBack.addEventListener("click",(e)=>{ if(e.target===modalBack) closeModal(); });
+  modalClose.addEventListener("click", closeModal);
+
+  btnDisclaimer.addEventListener("click", ()=>{
+    openModal("Aviso de uso", `
+      <p><b>Finalidade:</b> informativa e educacional. Leitura institucional baseada em <b>dados públicos</b>.</p>
+      <p><b>Não é:</b> parecer jurídico, monitoramento em tempo real, avaliação de conformidade, scoring de risco ou auditoria de empresa.</p>
+      <p><b>Limites:</b> a interpretação depende do contexto específico. Qualquer decisão deve ser construída com avaliação própria e assessoria adequada.</p>
+      <p class="small">Este protótipo inclui gráficos demonstrativos para composição visual do painel. No uso real, recomenda-se manter a leitura textual como eixo central.</p>
+    `);
+  });
+
+  btnAbout.addEventListener("click", ()=>{
+    openModal("Tese", `
+      <p><b>Regulação não muda de um dia para o outro.</b> A forma como o regulador decide, sim.</p>
+      <p>O Termômetro existe para sinalizar deslocamentos de atenção institucional e padrões de leitura pública que antecedem sanção, litígio ou dano reputacional.</p>
+      <p class="small">Sem marketing, sem serviços, sem promessa. Apenas leitura estruturada.</p>
+    `);
+  });
+
+  btnExport.addEventListener("click", ()=>{
+    openModal("Exportar", `
+      <p>Para exportar:</p>
+      <p><b>1)</b> Use “Imprimir / PDF” (Ctrl+P) e selecione “Salvar como PDF”.</p>
+      <p><b>2)</b> Se quiser um PDF com capa, você pode duplicar o HTML e criar uma página “capa” antes do painel.</p>
+      <p class="small">Em modo impressão, a topbar e a sidebar são ocultadas automaticamente.</p>
+    `);
+  });
+
+  btnPrint.addEventListener("click", ()=> window.print());
+
+  btnCopy.addEventListener("click", async ()=>{
+    const data = MODEL[currentKey];
+    const text =
+`AUCTORIS — Termômetro Regulatório (${data.periodLabel})
+Status: ${data.status.label}
+
+Temas em observação:
+- ${data.temas.map(t=>t.title).join("\n- ")}
+
+Órgãos em foco:
+- ${data.orgaos.map(o=>o.title).join("\n- ")}
+
+Leitura institucional:
+${data.leitura}
+
+Nota: material informativo e educacional. Não constitui parecer jurídico, avaliação de conformidade ou recomendação operacional.`;
+
+    try{
+      await navigator.clipboard.writeText(text);
+      openModal("Copiado", `<p>Resumo copiado para a área de transferência.</p><p class="small">Cole em PDF, LinkedIn ou memorando.</p>`);
+    }catch{
+      openModal("Copiar", `<p>Seu navegador bloqueou a cópia automática.</p><p class="small">Selecione e copie manualmente pelo botão direito.</p><pre style="white-space:pre-wrap; border:1px solid rgba(255,255,255,.12); padding:12px; border-radius:14px; background:rgba(0,0,0,.25);">${escapeHtml(text)}</pre>`);
+    }
+  });
+
+  function escapeHtml(str){
+    return str.replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[m]));
+  }
+
+  function renderList(container, arr){
+    container.innerHTML = "";
+    for(const it of arr){
+      const el = document.createElement("div");
+      el.className = "item";
+      el.innerHTML = `
+        <div class="pillIcon" aria-hidden="true">${it.icon}</div>
+        <div style="min-width:0;">
+          <b>${it.title}</b>
+          <span>${it.desc}</span>
+        </div>
+      `;
+      container.appendChild(el);
+    }
+  }
+
+  /* =========================
+     CHARTS — CANVAS (no libs)
+  ========================= */
+
+  function setupCanvas(canvas){
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    const w = Math.max(320, Math.floor(rect.width));
+    const h = Math.max(220, Math.floor(rect.height));
+    canvas.width = Math.floor(w * dpr);
+    canvas.height = Math.floor(h * dpr);
+    const ctx = canvas.getContext("2d");
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    return { ctx, w, h };
+  }
+
+  function drawTrend(canvas, series, accent){
+    const { ctx, w, h } = setupCanvas(canvas);
+    ctx.clearRect(0,0,w,h);
+
+    // bg
+    ctx.fillStyle = "rgba(0,0,0,0)";
+    ctx.fillRect(0,0,w,h);
+
+    const pad = 16;
+    const innerW = w - pad*2;
+    const innerH = h - pad*2;
+
+    // grid lines
+    ctx.strokeStyle = "rgba(255,255,255,.07)";
+    ctx.lineWidth = 1;
+    for(let i=0;i<=4;i++){
+      const y = pad + (innerH*(i/4));
+      ctx.beginPath(); ctx.moveTo(pad,y); ctx.lineTo(pad+innerW,y); ctx.stroke();
+    }
+
+    const min=0, max=100;
+    const pts = series.map((v,i)=>{
+      const x = pad + innerW*(i/(series.length-1));
+      const y = pad + innerH*(1 - (v-min)/(max-min));
+      return {x,y,v};
+    });
+
+    // area
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, pts[0].y);
+    for(const p of pts) ctx.lineTo(p.x,p.y);
+    ctx.lineTo(pts[pts.length-1].x, pad+innerH);
+    ctx.lineTo(pts[0].x, pad+innerH);
+    ctx.closePath();
+    const grad = ctx.createLinearGradient(0,pad,0,pad+innerH);
+    grad.addColorStop(0, "rgba(110,168,255,.22)");
+    grad.addColorStop(1, "rgba(110,168,255,0)");
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // line
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, pts[0].y);
+    for(const p of pts) ctx.lineTo(p.x,p.y);
+    ctx.strokeStyle = accent;
+    ctx.lineWidth = 2.4;
+    ctx.stroke();
+
+    // points
+    for(const p of pts){
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,4,0,Math.PI*2);
+      ctx.fillStyle = "rgba(234,240,255,.92)";
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,6.8,0,Math.PI*2);
+      ctx.strokeStyle = "rgba(110,168,255,.35)";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    // label
+    ctx.fillStyle = "rgba(234,240,255,.70)";
+    ctx.font = "600 12px ui-sans-serif, system-ui";
+    ctx.fillText("Baixo", pad, pad+12);
+    ctx.fillText("Alto", pad, pad+innerH-6);
+  }
+
+  function drawGauge(canvas, value, level){
+    const { ctx, w, h } = setupCanvas(canvas);
+    ctx.clearRect(0,0,w,h);
+
+    const cx = w/2, cy = h*0.75;
+    const r = Math.min(w,h)*0.42;
+
+    const start = Math.PI;
+    const end = 2*Math.PI;
+
+    // track
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, start, end);
+    ctx.strokeStyle = "rgba(255,255,255,.10)";
+    ctx.lineWidth = 18;
+    ctx.lineCap = "round";
+    ctx.stroke();
+
+    // segments
+    const segs = [
+      { a: start, b: start + (end-start)*0.33, c:"rgba(70,211,154,.75)" },
+      { a: start + (end-start)*0.33, b: start + (end-start)*0.66, c:"rgba(242,193,78,.80)" },
+      { a: start + (end-start)*0.66, b: end, c:"rgba(255,107,107,.80)" }
+    ];
+    ctx.lineWidth = 18;
+    for(const s of segs){
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, s.a, s.b);
+      ctx.strokeStyle = s.c;
+      ctx.stroke();
+    }
+
+    // needle
+    const t = start + (end-start)*(Math.max(0,Math.min(100,value))/100);
+    const nx = cx + Math.cos(t)* (r-10);
+    const ny = cy + Math.sin(t)* (r-10);
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(nx, ny);
+    ctx.strokeStyle = "rgba(234,240,255,.92)";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, 8, 0, Math.PI*2);
+    ctx.fillStyle = levelColor(level);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(cx, cy, 13, 0, Math.PI*2);
+    ctx.strokeStyle = "rgba(255,255,255,.12)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // text
+    ctx.fillStyle = "rgba(234,240,255,.88)";
+    ctx.font = "900 18px ui-sans-serif, system-ui";
+    ctx.textAlign = "center";
+    ctx.fillText(`${value}/100`, cx, cy - r*0.15);
+
+    ctx.fillStyle = "rgba(234,240,255,.62)";
+    ctx.font = "650 12px ui-sans-serif, system-ui";
+    ctx.fillText("Sinal visual (qualitativo)", cx, cy - r*0.15 + 18);
+
+    ctx.textAlign = "left";
+  }
+
+  function drawDonut(canvas, donut, accent){
+    const { ctx, w, h } = setupCanvas(canvas);
+    ctx.clearRect(0,0,w,h);
+
+    const cx = w*0.28, cy = h*0.55;
+    const r = Math.min(w,h)*0.32;
+
+    const total = donut.reduce((a,b)=>a+b.value,0) || 1;
+
+    const colors = [
+      "rgba(110,168,255,.85)",
+      "rgba(156,196,255,.78)",
+      "rgba(242,193,78,.75)",
+      "rgba(70,211,154,.70)"
+    ];
+
+    let ang = -Math.PI/2;
+    donut.forEach((d, i)=>{
+      const frac = d.value/total;
+      const next = ang + frac * Math.PI*2;
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);
+      ctx.arc(cx,cy,r,ang,next);
+      ctx.closePath();
+      ctx.fillStyle = colors[i % colors.length];
+      ctx.fill();
+      ang = next;
+    });
+
+    // hole
+    ctx.beginPath();
+    ctx.arc(cx,cy,r*0.62,0,Math.PI*2);
+    ctx.fillStyle = "rgba(7,10,18,.65)";
+    ctx.fill();
+
+    // legend
+    const lx = w*0.55, ly = h*0.26;
+    ctx.font = "800 12px ui-sans-serif, system-ui";
+    ctx.fillStyle = "rgba(234,240,255,.88)";
+    ctx.fillText("Temas (peso relativo)", lx, ly);
+
+    ctx.font = "650 12px ui-sans-serif, system-ui";
+    donut.forEach((d,i)=>{
+      const y = ly + 18 + i*22;
+      ctx.fillStyle = colors[i % colors.length];
+      ctx.fillRect(lx, y-10, 12, 12);
+      ctx.fillStyle = "rgba(234,240,255,.72)";
+      ctx.fillText(`${d.name} — ${Math.round((d.value/total)*100)}%`, lx+18, y);
+    });
+
+    // subtle border
+    ctx.strokeStyle = "rgba(255,255,255,.10)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(cx,cy,r+0.5,0,Math.PI*2);
+    ctx.stroke();
+  }
+
+  /* =========================
+     RENDER
+  ========================= */
+
+  function applyData(key){
+    currentKey = key;
+    const data = MODEL[key];
+
+    badgePeriodo.textContent = data.periodLabel;
+
+    // status
+    const c = levelColor(data.status.level);
+    statusDot.style.background = c;
+    statusText.textContent = data.status.label;
+    statusHint.textContent = "Classificação baseada em volume, natureza e tom institucional de atos públicos recentes.";
+
+    // kpis
+    kpiFoco.textContent = data.kpis.foco[0];
+    kpiFocoNote.textContent = data.kpis.foco[1];
+
+    kpiSinal.textContent = data.kpis.sinal[0];
+    kpiSinalNote.textContent = data.kpis.sinal[1];
+
+    kpiCiclo.textContent = data.kpis.ciclo[0];
+    kpiCicloNote.textContent = data.kpis.ciclo[1];
+
+    kpiAtencao.textContent = data.kpis.atencao[0];
+    kpiAtencaoNote.textContent = data.kpis.atencao[1];
+
+    // lists
+    renderList(temasList, data.temas);
+    renderList(orgaosList, data.orgaos);
+
+    leituraText.textContent = data.leitura;
+
+    // charts
+    const accent = getComputedStyle(document.documentElement).getPropertyValue("--accent2").trim();
+    drawTrend(document.getElementById("trend"), data.trendSeries, accent);
+    drawGauge(document.getElementById("gauge"), data.gaugeValue, data.status.level);
+    drawDonut(document.getElementById("donut"), data.donut, accent);
+  }
+
+  periodoSel.addEventListener("change", ()=> applyData(periodoSel.value));
+  window.addEventListener("resize", ()=> applyData(currentKey));
+
+  // Init
+  applyData(periodoSel.value);
+
+</script>
+
+
+</body></html>

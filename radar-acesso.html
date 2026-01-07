@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<!-- saved from url=(0108)file:///C:/Users/Guilherme%20Araujo/Downloads/PORTAL%20DE%20DIREITO%20REGULATORIO/radaracesso.html#solicitar -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AUCTORIS — Acesso ao Radar Sancionador</title>
+
+<style>
+:root{
+  --bg0:#070A12;
+  --bg1:#0A1020;
+  --bg2:#0B1430;
+  --card:#0C1733;
+  --line:rgba(255,255,255,.10);
+
+  --fg:#EAF0FF;
+  --muted:rgba(234,240,255,.72);
+
+  --accent:#6EA8FF;
+  --accent2:#9CC4FF;
+
+  --warn:#F2C14E;
+  --risk:#FF6B6B;
+
+  --radius:18px;
+  --shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:
+    radial-gradient(1000px 600px at 20% 10%, rgba(255,107,107,.10), transparent 60%),
+    radial-gradient(900px 600px at 80% 20%, rgba(242,193,78,.10), transparent 60%),
+    linear-gradient(180deg, var(--bg0), var(--bg1) 50%, var(--bg0));
+  color:var(--fg);
+  font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+  line-height:1.55;
+}
+
+a{color:var(--accent2);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.gridFX{
+  position:fixed;inset:0;pointer-events:none;opacity:.32;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:56px 56px;
+}
+
+.topbar{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(12px);
+  background:rgba(7,10,18,.88);
+  border-bottom:1px solid var(--line);
+}
+
+.topbarInner{
+  max-width:1180px;margin:0 auto;
+  padding:14px 18px;
+  display:flex;align-items:center;gap:14px;
+}
+
+.brand{
+  display:flex;align-items:center;gap:12px;
+}
+.brandBox{
+  width:38px;height:38px;border-radius:12px;
+  background:radial-gradient(circle at 30% 30%, rgba(255,107,107,.9), rgba(110,168,255,.18));
+  box-shadow:0 10px 30px rgba(255,107,107,.18);
+}
+.brandText strong{
+  letter-spacing:.22em;font-size:12px;
+}
+.brandText span{
+  font-size:12px;color:var(--muted);
+}
+
+.toolbar{
+  margin-left:auto;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+
+.btn{
+  border:1px solid var(--line);
+  background:rgba(12,23,51,.45);
+  color:var(--fg);
+  padding:10px 14px;
+  border-radius:999px;
+  font-size:12px;font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+.btn:hover{background:rgba(12,26,65,.65)}
+
+.btnPrimary{
+  border-color: rgba(255,107,107,.35);
+  background: linear-gradient(180deg, rgba(255,107,107,.22), rgba(12,23,51,.45));
+}
+
+.shell{
+  max-width:1180px;margin:0 auto;
+  padding:34px 18px 86px;
+}
+
+.card{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:rgba(12,23,51,.55);
+  box-shadow:var(--shadow);
+  padding:22px;
+  margin-bottom:18px;
+}
+
+.grid2{
+  display:grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap:18px;
+}
+@media(max-width:980px){ .grid2{grid-template-columns:1fr} }
+
+.tag{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.18);
+  padding:8px 12px;
+  border-radius:999px;
+  color: rgba(234,240,255,.82);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.dot{
+  width:10px;height:10px;border-radius:50%;
+  background: var(--warn);
+  box-shadow: 0 0 0 4px rgba(242,193,78,.12);
+}
+
+.h1{margin:0;font-size:30px;letter-spacing:.01em}
+.lead{max-width:78ch;color:var(--muted);font-weight:600}
+
+.hr{border:0;border-top:1px solid var(--line);margin:14px 0}
+
+.li{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:12px 12px;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.14);
+  border-radius: 14px;
+  margin-bottom:10px;
+}
+.icon{
+  width:34px;height:34px;border-radius: 14px;
+  border:1px solid rgba(255,107,107,.28);
+  background: rgba(255,107,107,.10);
+  display:grid;place-items:center;
+  font-weight:900;
+}
+.li b{display:block;margin:0 0 4px}
+.li span{display:block;color:var(--muted);font-weight:600;font-size:13px}
+
+.price{
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  padding:14px;
+  border:1px solid rgba(255,255,255,.14);
+  background: linear-gradient(135deg, rgba(255,107,107,.16), rgba(0,0,0,.14));
+  border-radius: 16px;
+}
+.price strong{font-size:22px;letter-spacing:.01em}
+.price small{color:var(--muted);font-weight:700}
+
+.note{
+  color:rgba(234,240,255,.78);
+  font-size:12px;
+  font-weight:650;
+}
+
+.footer{
+  margin-top:28px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:11px;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap:18px;
+}
+@media(max-width:980px){ .footer{grid-template-columns:1fr} }
+
+.miniLink{color:rgba(234,240,255,.80);font-weight:700}
+
+/* Conselho mode: remove "efeitos" */
+.conselho .gridFX{display:none}
+.conselho body{}
+.conselho .tag, .conselho .price{background:rgba(12,23,51,.55)}
+</style>
+</head>
+<body>
+<div class="gridFX"></div>
+
+<div class="topbar">
+  <div class="topbarInner">
+
+    <div class="brand">
+      <div class="brandBox"></div>
+      <div class="brandText">
+        <strong>AUCTORIS</strong><br>
+        <span>Acesso ao Radar Sancionador · conteúdo restrito</span>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <button class="btn" id="btnConselho">Versão Conselho</button>
+      <button class="btn" id="btnLimites">Limites</button>
+      <a class="btn btnPrimary" href="file:///C:/Users/Guilherme%20Araujo/Downloads/PORTAL%20DE%20DIREITO%20REGULATORIO/radaracesso.html#solicitar" id="btnSolicitar">Solicitar acesso</a>
+
+      <div style="font-size:12px;color:var(--muted);font-weight:600;line-height:1.4">
+        Guilherme Rafael de Souza Araujo<br>
+        Advogado · Professor · Pesquisador · Escritor<br>
+        <a href="https://www.linkedin.com/in/guilhermersaraujo" target="_blank">
+          linkedin.com/in/guilhermersaraujo
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="shell">
+<section class="card">
+  <div class="tag"><span class="dot"></span> Radar Sancionador — Tecnologia</div>
+
+  <div style="height:10px"></div>
+
+  <h1 class="h1">Leitura sancionatória, sem consultoria.</h1>
+
+  <p class="lead">
+    O Radar Sancionador organiza decisões e padrões públicos de sanção para revelar
+    <b>como o regulador está lendo</b> determinadas condutas, falhas e narrativas.
+    Não é serviço. Não é auditoria. Não é compliance.
+    É um <b>relatório institucional</b> desenhado para diretoria e conselho.
+  </p>
+
+  <hr class="hr">
+
+  <div class="grid2">
+    <div>
+      <div class="li">
+        <div class="icon">I</div>
+        <div>
+          <b>O que o Radar faz</b>
+          <span>Interpreta padrões sancionatórios públicos e sinaliza deslocamentos interpretativos com linguagem executiva.</span>
+        </div>
+      </div>
+
+      <div class="li">
+        <div class="icon">II</div>
+        <div>
+          <b>O que o Radar não faz</b>
+          <span>Não avalia empresas, não emite parecer, não recomenda ações e não substitui assessoria jurídica ou técnica.</span>
+        </div>
+      </div>
+
+      <div class="li">
+        <div class="icon">III</div>
+        <div>
+          <b>Para quem é</b>
+          <span>Fundadores, diretores, jurídico interno e lideranças que respondem institucionalmente por dados e decisões.</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="price">
+        <div>
+          <small>Assinatura mensal</small><br>
+          <strong>R$ 97</strong> <small>/ mês</small>
+        </div>
+        <div style="margin-left:auto;text-align:right">
+          <small>Formato</small><br>
+          <strong style="font-size:14px">PDF</strong> <small>mensal</small>
+        </div>
+      </div>
+
+      <div style="height:10px"></div>
+
+      <div class="note">
+        Cancelável a qualquer momento. Sem SLA. Sem promessa de resultado.
+        Conteúdo baseado exclusivamente em fontes públicas.
+      </div>
+
+      <div style="height:14px"></div>
+
+      <div class="li">
+        <div class="icon">⟡</div>
+        <div>
+          <b>Exemplo de relatório</b>
+          <span>
+            <a class="miniLink" href="file:///C:/Users/Guilherme%20Araujo/Downloads/PORTAL%20DE%20DIREITO%20REGULATORIO/radar_pdf_mensal.html" target="_blank">Ver modelo PDF (exemplo)</a>
+            <br>*(link substituível)*
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section class="card">
+  <h2 style="margin:0 0 10px;letter-spacing:.10em;text-transform:uppercase;font-size:14px">
+    Estrutura do Radar (fixa)
+  </h2>
+
+  <div class="grid2">
+    <div>
+      <div class="li">
+        <div class="icon">1</div>
+        <div>
+          <b>Síntese executiva</b>
+          <span>Status do período + leitura em 1 linha + foco e exposição institucional.</span>
+        </div>
+      </div>
+      <div class="li">
+        <div class="icon">2</div>
+        <div>
+          <b>Destaques do mês</b>
+          <span>Três achados: padrão recorrente, sinal interpretativo e risco institucional.</span>
+        </div>
+      </div>
+      <div class="li">
+        <div class="icon">3</div>
+        <div>
+          <b>Padrões sancionatórios</b>
+          <span>Padrões recorrentes de infração e seus significados institucionais (sem personalização).</span>
+        </div>
+      </div>
+      <div class="li">
+        <div class="icon">4</div>
+        <div>
+          <b>Mapa de riscos institucionais</b>
+          <span>Riscos + vetores + notas. Não é scoring. Não é auditoria.</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="li">
+        <div class="icon">5</div>
+        <div>
+          <b>Decisões e fontes públicas</b>
+          <span>Lista/tabela com síntese de leitura decisória e referências públicas.</span>
+        </div>
+      </div>
+      <div class="li">
+        <div class="icon">6</div>
+        <div>
+          <b>Leitura consolidada</b>
+          <span>Parágrafo final “nível conselho” — âncora do relatório mensal.</span>
+        </div>
+      </div>
+      <div class="li">
+        <div class="icon">7</div>
+        <div>
+          <b>Limites e uso</b>
+          <span>Disclaimers de blindagem e vedação de uso derivado não autorizado.</span>
+        </div>
+      </div>
+
+      <div class="li">
+        <div class="icon">⟂</div>
+        <div>
+          <b>Entrega</b>
+          <span>1 PDF mensal (6–10 páginas). Sem dashboards em tempo real. Sem alertas personalizados.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="card" id="solicitar">
+  <h2 style="margin:0 0 10px;letter-spacing:.10em;text-transform:uppercase;font-size:14px">
+    Solicitar acesso
+  </h2>
+
+  <p class="lead" style="margin-top:0">
+    Se este tipo de leitura institucional é relevante para sua diretoria,
+    você pode solicitar acesso ao Radar.
+  </p>
+
+  <div class="grid2">
+    <div class="li">
+      <div class="icon">✉</div>
+      <div>
+        <b>Canal</b>
+        <span>
+          E-mail: <a class="miniLink" href="mailto:contato@grsaengine.com">contato@grsaengine.com</a><br>
+          Assunto sugerido: <b>“Acesso — Radar Sancionador”</b>
+        </span>
+      </div>
+    </div>
+
+    <div class="li">
+      <div class="icon">⟡</div>
+      <div>
+        <b>Mensagem mínima (modelo)</b>
+        <span>
+          “Solicito acesso ao Radar Sancionador — Tecnologia.  
+          Empresa/Setor: ____.  
+          E-mail para recebimento: ____.”
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:12px">
+    O acesso é concedido de forma controlada. Conteúdo restrito. Uso educacional/institucional.
+  </div>
+</section>
+
+<footer class="footer">
+  <div>
+    <b style="color:rgba(234,240,255,.85)">Sistema</b><br>
+    AUCTORIS — Termômetro Regulatório · Radar Sancionador
+    <div style="margin-top:8px">
+      <span style="color:rgba(234,240,255,.70)">
+        “O Termômetro cria hábito. O Radar cria valor. O AUCTORIS cria poder institucional.”
+      </span>
+    </div>
+  </div>
+
+  <div>
+    <b style="color:rgba(234,240,255,.85)">Autor</b><br>
+    Guilherme Rafael de Souza Araujo<br>
+    Advogado · Professor · Pesquisador · Escritor<br>
+    <a class="miniLink" href="https://www.linkedin.com/in/guilhermersaraujo" target="_blank">
+      @guilhermersaraujo
+    </a>
+  </div>
+
+  <div>
+    <b style="color:rgba(234,240,255,.85)">Limites</b><br>
+    Material informativo e educacional.<br>
+    Não constitui parecer jurídico ou avaliação de conformidade.<br>
+    Vedada reprodução e uso derivado sem autorização.
+  </div>
+</footer>
+
+</div>
+
+<script>
+  const btnConselho = document.getElementById("btnConselho");
+  const btnLimites = document.getElementById("btnLimites");
+  let conselho = false;
+
+  btnConselho.addEventListener("click", ()=>{
+    conselho = !conselho;
+    document.documentElement.classList.toggle("conselho", conselho);
+    btnConselho.textContent = conselho ? "Modo Padrão" : "Versão Conselho";
+  });
+
+  btnLimites.addEventListener("click", ()=>{
+    alert(
+      "AUCTORIS — Radar Sancionador\\n\\n" +
+      "Conteúdo informativo e educacional.\\n" +
+      "Não constitui parecer jurídico, auditoria, avaliação de conformidade ou recomendação operacional.\\n" +
+      "Não há avaliação individual de empresas.\\n" +
+      "Uso derivado e reprodução não autorizados são vedados."
+    );
+  });
+</script>
+
+
+
+</body></html>

@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AUCTORIS — Mapa Institucional do Sistema</title>
+
+<style>
+:root{
+  --ink:#0a1020;
+  --muted:#3f4a66;
+  --muted2:#5a6788;
+  --line:#e6e9f2;
+  --navy:#071833;
+  --navy2:#0b2146;
+  --paper:#ffffff;
+  --soft:#f6f7fb;
+
+  --sans:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  --serif:ui-serif,Georgia,Palatino,serif;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--soft);
+  font-family:var(--sans);
+  color:var(--ink);
+}
+
+/* Página única (PDF-first) */
+.page{
+  width:210mm;
+  min-height:297mm;
+  margin:10mm auto;
+  background:var(--paper);
+  border:1px solid var(--line);
+  box-shadow:0 20px 60px rgba(0,0,0,.08);
+}
+
+.bar{
+  height:10mm;
+  background:linear-gradient(90deg,var(--navy),var(--navy2));
+}
+
+.pad{
+  padding:16mm 16mm 14mm;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12mm;
+}
+
+.brand h1{
+  margin:0;
+  font-family:var(--mono);
+  font-size:11pt;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-weight:900;
+}
+.brand p{
+  margin:2mm 0 0;
+  font-size:10pt;
+  color:var(--muted);
+}
+
+.stamp{
+  font-family:var(--mono);
+  font-size:9pt;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted2);
+}
+
+.title{
+  margin:10mm 0 0;
+  font-family:var(--serif);
+  font-size:22pt;
+  font-weight:850;
+  line-height:1.15;
+}
+.lead{
+  margin:4mm 0 0;
+  font-size:11pt;
+  line-height:1.65;
+  color:var(--muted);
+  max-width:170mm;
+}
+
+.section{
+  margin-top:10mm;
+}
+
+.kicker{
+  font-family:var(--mono);
+  font-size:9pt;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted2);
+  margin-bottom:4mm;
+}
+
+.map{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:6mm;
+}
+
+.node{
+  border:1px solid var(--line);
+  border-radius:6mm;
+  padding:6mm;
+  background:#fbfcff;
+}
+
+.node.main{
+  border-width:2px;
+}
+
+.node h3{
+  margin:0 0 2mm;
+  font-size:12pt;
+}
+.node p{
+  margin:0 0 3mm;
+  font-size:10.5pt;
+  line-height:1.6;
+  color:var(--muted);
+}
+
+.node a{
+  font-family:var(--mono);
+  font-size:9.5pt;
+  letter-spacing:.06em;
+  text-decoration:none;
+  color:var(--navy);
+  border-bottom:1px solid rgba(7,24,51,.25);
+}
+.node a:hover{
+  border-bottom-color:rgba(7,24,51,.6);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6mm;
+}
+@media print{
+  body{background:#fff}
+  .page{margin:0;border:none;box-shadow:none}
+}
+
+.footer{
+  margin-top:12mm;
+  border-top:1px solid var(--line);
+  padding-top:5mm;
+  display:flex;
+  justify-content:space-between;
+  gap:10mm;
+  flex-wrap:wrap;
+}
+.author b{display:block;font-size:10.5pt}
+.author span{
+  display:block;
+  font-size:9.6pt;
+  color:var(--muted);
+}
+.author a{
+  color:var(--navy);
+  text-decoration:none;
+  border-bottom:1px solid rgba(7,24,51,.25);
+}
+.author a:hover{border-bottom-color:rgba(7,24,51,.6)}
+.disc{
+  max-width:110mm;
+  font-size:8.9pt;
+  line-height:1.55;
+  color:var(--muted2);
+}
+</style>
+</head>
+
+<body>
+
+<section class="page">
+  <div class="bar"></div>
+  <div class="pad">
+
+    <div class="header">
+      <div class="brand">
+        <h1>AUCTORIS</h1>
+        <p>Sistema institucional de leitura decisória</p>
+      </div>
+      <div class="stamp">Mapa institucional · 2026</div>
+    </div>
+
+    <h2 class="title">Mapa institucional do sistema AUCTORIS</h2>
+    <p class="lead">
+      Este documento apresenta a arquitetura funcional do AUCTORIS e serve como
+      ponto único de acesso às suas camadas institucionais.
+      Linguagem de conselho. Uso interno. Dados públicos.
+    </p>
+
+    <!-- HOME -->
+    <div class="section">
+      <div class="kicker">Entrada do sistema</div>
+      <div class="node main">
+        <h3>HOME — Sistema Institucional</h3>
+        <p>
+          Porta de entrada do AUCTORIS. Apresenta o sistema, seu escopo,
+          limites e direciona para Termômetro, Radar e Relatórios.
+        </p>
+        <a href="index.html">Abrir index.html →</a>
+      </div>
+    </div>
+
+    <!-- CAMADAS -->
+    <div class="section">
+      <div class="kicker">Camadas funcionais</div>
+      <div class="grid">
+
+        <div class="node">
+          <h3>Termômetro Regulatório</h3>
+          <p>
+            Leitura contínua de sinais regulatórios.
+            Camada de hábito e sensibilidade institucional.
+          </p>
+          <a href="termometro.html">Abrir termometro.html →</a>
+        </div>
+
+        <div class="node">
+          <h3>Radar Sancionador</h3>
+          <p>
+            Consolidação de padrões sancionatórios e sinais interpretativos.
+            Núcleo de valor decisório.
+          </p>
+          <a href="radar.html">Abrir radar.html →</a>
+        </div>
+
+        <div class="node">
+          <h3>Relatório Mensal</h3>
+          <p>
+            Documento PDF-first para diretoria e conselho.
+            Leitura consolidada do período.
+          </p>
+          <a href="radar-relatorio-2026-01.html">Abrir radar-relatorio-2026-01.html →</a>
+        </div>
+
+        <div class="node">
+          <h3>Acesso ao Radar</h3>
+          <p>
+            Página de controle e explicação institucional.
+            Não comercial. Uso controlado.
+          </p>
+          <a href="radar-acesso.html">Abrir radar-acesso.html →</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NOTA -->
+    <div class="section">
+      <div class="node">
+        <h3>Nota institucional</h3>
+        <p>
+          O Termômetro cria hábito.<br>
+          O Radar cria valor.<br>
+          O AUCTORIS cria poder institucional.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="author">
+        <b>Guilherme Rafael de Souza Araujo</b>
+        <span>Advogado · Professor · Pesquisador · Escritor</span>
+        <span>
+          LinkedIn:
+          <a href="https://www.linkedin.com/in/guilhermersaraujo" target="_blank">
+            https://www.linkedin.com/in/guilhermersaraujo
+          </a>
+        </span>
+      </div>
+      <div class="disc">
+        Conteúdo baseado exclusivamente em dados públicos.
+        Não emite parecer jurídico, não executa técnica,
+        não avalia empresas individualmente e não promete
+        prevenção, compliance ou resultado.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</body>
+</html>

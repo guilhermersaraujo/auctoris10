@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AUCTORIS — Sistema Institucional de Leitura Decisória</title>
+
+<style>
+:root{
+  --bg:#050c16;
+  --panel:#0b1627;
+  --ink:#eaf0ff;
+  --muted:#b7c3df;
+  --line:rgba(255,255,255,.12);
+  --accent:#9fb7ff;
+  --accent2:#d7e2ff;
+  --warn:#ffd38a;
+  --shadow:0 20px 60px rgba(0,0,0,.4);
+  --radius:22px;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  --sans:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:var(--sans);
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 700px at 70% 10%, rgba(159,183,255,.12), transparent 55%),
+    linear-gradient(180deg,#050c16,#06101c 60%,#050c16);
+}
+
+.wrap{max-width:1200px;margin:0 auto;padding:26px 18px 80px}
+
+.topbar{
+  position:sticky;top:0;z-index:40;
+  backdrop-filter:blur(10px);
+  background:rgba(5,12,22,.85);
+  border-bottom:1px solid var(--line);
+}
+.topbar .inner{
+  max-width:1200px;margin:0 auto;
+  padding:14px 18px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.brand h1{
+  margin:0;
+  font-size:14px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-weight:800;
+}
+.brand p{
+  margin:2px 0 0;
+  font-size:12px;
+  color:var(--muted);
+  letter-spacing:.06em;
+}
+
+.hero{
+  margin-top:28px;
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:18px;
+}
+@media(max-width:960px){
+  .hero{grid-template-columns:1fr}
+}
+
+.panel{
+  border-radius:var(--radius);
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+  box-shadow:var(--shadow);
+}
+.panel .pad{padding:26px}
+
+.kicker{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.75);
+  margin-bottom:14px;
+}
+
+.title{
+  margin:0;
+  font-size:34px;
+  line-height:1.15;
+  font-weight:800;
+}
+.title em{color:var(--accent);font-style:normal}
+
+.lead{
+  margin-top:14px;
+  font-size:15px;
+  line-height:1.65;
+  color:var(--muted);
+  max-width:68ch;
+}
+
+.actions{
+  margin-top:22px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+@media(max-width:960px){.actions{grid-template-columns:1fr}}
+
+.action{
+  border-radius:20px;
+  border:1px solid var(--line);
+  background:
+    radial-gradient(120% 120% at 70% 0%, rgba(159,183,255,.12), transparent 60%),
+    rgba(255,255,255,.03);
+  padding:20px;
+  transition:transform .15s ease,background .15s ease;
+}
+.action:hover{transform:translateY(-2px);background:rgba(255,255,255,.05)}
+.action h4{
+  margin:0 0 8px;
+  font-size:16px;
+  font-weight:750;
+}
+.action p{
+  margin:0 0 14px;
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.55;
+}
+.action a{
+  font-size:13px;
+  letter-spacing:.06em;
+  color:var(--accent2);
+  text-decoration:none;
+  border-bottom:1px solid rgba(159,183,255,.35);
+}
+.action a:hover{border-bottom-color:rgba(159,183,255,.8)}
+
+.notice{
+  margin-top:18px;
+  border:1px solid rgba(255,211,138,.35);
+  background:rgba(255,211,138,.06);
+  border-radius:18px;
+  padding:16px;
+}
+.notice b{
+  display:block;
+  font-family:var(--mono);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--warn);
+  margin-bottom:6px;
+}
+.notice span{
+  font-size:13px;
+  line-height:1.55;
+  color:rgba(255,255,255,.8);
+}
+
+.footer{
+  margin-top:28px;
+  border-top:1px solid var(--line);
+  padding-top:18px;
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.author b{display:block}
+.author span{
+  display:block;
+  font-size:13px;
+  color:var(--muted);
+}
+.author a{
+  color:var(--accent2);
+  text-decoration:none;
+  border-bottom:1px solid rgba(159,183,255,.35);
+}
+.author a:hover{border-bottom-color:rgba(159,183,255,.8)}
+
+.legal{
+  max-width:60ch;
+  font-size:12px;
+  line-height:1.55;
+  color:rgba(255,255,255,.65);
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="inner">
+    <div class="brand">
+      <h1>AUCTORIS</h1>
+      <p>Sistema institucional de leitura decisória</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section class="hero">
+  <div class="panel">
+    <div class="pad">
+      <div class="kicker">Entrada institucional</div>
+      <h2 class="title">
+        Termômetro Regulatório<br>
+        <em>e Radar Sancionador</em>
+      </h2>
+      <p class="lead">
+        O AUCTORIS organiza sinais regulatórios e padrões sancionatórios
+        a partir de dados públicos, em linguagem própria para diretoria e conselho.
+      </p>
+    </div>
+  </div>
+
+  <aside class="panel">
+    <div class="pad">
+      <div class="kicker">Acesso direto</div>
+
+      <div class="actions">
+
+        <div class="action">
+          <h4>Termômetro Regulatório</h4>
+          <p>Leitura contínua de sinais regulatórios.</p>
+          <a href="termometro.html">Acessar →</a>
+        </div>
+
+        <div class="action">
+          <h4>Radar Sancionador</h4>
+          <p>Padrões decisórios e riscos institucionais.</p>
+          <a href="radar.html">Acessar →</a>
+        </div>
+
+        <div class="action">
+          <h4>Relatório Mensal</h4>
+          <p>Documento PDF-first para diretoria e conselho.</p>
+          <a href="radar-relatorio-2026-01.html">Abrir →</a>
+        </div>
+
+      </div>
+
+      <div class="notice">
+        <b>AUCTORIS.AI</b>
+        <span>
+          Ambiente em desenvolvimento. Uso restrito.
+        </span>
+      </div>
+    </div>
+  </aside>
+</section>
+
+<footer class="footer">
+  <div class="author">
+    <b>Guilherme Rafael de Souza Araujo</b>
+    <span>Advogado · Professor · Pesquisador · Escritor</span>
+    <span>
+      LinkedIn:
+      <a href="https://www.linkedin.com/in/guilhermersaraujo" target="_blank">
+        https://www.linkedin.com/in/guilhermersaraujo
+      </a>
+    </span>
+  </div>
+
+  <div class="legal">
+    Conteúdo baseado exclusivamente em dados públicos.
+    Não emite parecer jurídico, não executa técnica,
+    não avalia empresas individualmente e não promete
+    prevenção, compliance ou resultado.
+  </div>
+</footer>
+
+</main>
+</body>
+</html>
